@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Frequency Song Player</title>
+  <style>
+    :root {
+      --bg-1: #0d0d16;   /* deep dark */
+      --bg-2: #1a1a2e;   /* card / button */
+      --bg-3: #252545;   /* hover / darker */
+      --accent: #6c63ff; /* purple glow */
+      --text: #eaeaea;   /* soft white */
+    }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", sans-serif;
+      background: var(--bg-1);
+      color: var(--text);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      flex-direction: column;
+      padding: 20px;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      color: var(--accent);
+      text-align: center;
+      font-size: 2rem;
+      text-shadow: 0 0 12px rgba(108, 99, 255, 0.6);
+    }
+
+    .freq-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 24px;
+      justify-content: center;
+    }
+
+    .freq-tabs button {
+      padding: 12px 20px;
+      border: none;
+      border-radius: 10px;
+      background: var(--bg-2);
+      color: var(--text);
+      cursor: pointer;
+      transition: 0.25s;
+      font-size: 15px;
+      font-weight: 500;
+      box-shadow: 0 0 10px rgba(0,0,0,0.4);
+    }
+
+    .freq-tabs button:hover {
+      background: var(--bg-3);
+    }
+
+    .freq-tabs button.active {
+      background: var(--accent);
+      color: #fff;
+      box-shadow: 0 0 15px rgba(108, 99, 255, 0.7);
+    }
+
+    .player-box {
+      width: 100%;
+      max-width: 750px;
+      border-radius: 14px;
+      overflow: hidden;
+      background: #000;
+      box-shadow: 0 6px 25px rgba(0,0,0,0.6);
+      transition: 0.3s;
+    }
+
+    iframe {
+      width: 100%;
+      height: 420px;
+      border: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>🎵 Frequency Song Player</h1>
+
+  <div class="freq-tabs">
+    <button data-link="https://www.youtube.com/embed/NVlxJRihpdE" class="active">6 Hz – Deep Calm</button>
+    <button data-link="https://www.youtube.com/embed/x6A5b6xgwzA">10 Hz – Reduce Overthinking</button>
+    <button data-link="https://www.youtube.com/embed/UllduL1OqOc">432 Hz – Soothing</button>
+    <button data-link="https://www.youtube.com/embed/qgSb8QdFU7k">528 Hz – Emotional Comfort</button>
+  </div>
+
+  <div class="player-box">
+    <iframe id="freq-iframe"
+      src="https://www.youtube.com/embed/NVlxJRihpdE"
+      title="Frequency Player"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+    </iframe>
+  </div>
+
+  <script>
+    document.querySelectorAll(".freq-tabs button").forEach(btn => {
+      btn.addEventListener("click", () => {
+        document.querySelectorAll(".freq-tabs button").forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        document.getElementById("freq-iframe").src = btn.dataset.link;
+      });
+    });
+  </script>
+</body>
+</html>
